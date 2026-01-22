@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Document{% endblock %}</title>
+
+    <link rel="icon" href="{% static 'faviconPyPortfolio/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{% static 'faviconPyPortfolio/favicon-96x96.png' %}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'faviconPyPortfolio/favicon.svg' %}" />
+    <link rel="shortcut icon" href="{% static 'faviconPyPortfolio/favicon.ico' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'faviconPyPortfolio/apple-touch-icon.png' %}" />
+    <meta name="apple-mobile-web-app-title" content="PyPortfolio" />
+    <link rel="manifest" href="{% static 'site.webmanifest' %}" />
+
+    <link rel="stylesheet" href="https://unpkg.com/@pnotify/core/dist/PNotify.css">
+    <link rel="stylesheet" href="https://unpkg.com/@pnotify/core/dist/BrightTheme.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Overpass+Mono:wght@300..700&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="{% static '/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <main>
+        {% block main_content %}{% endblock %}
+    </main>
+
+    <script src="https://unpkg.com/@pnotify/core/dist/PNotify.js"></script>
+    <script src="https://unpkg.com/@pnotify/core/dist/BrightTheme.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
