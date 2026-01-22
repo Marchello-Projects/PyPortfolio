@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Cv
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms.utils import ErrorList
 
@@ -40,3 +41,8 @@ class UserLoginForm(AuthenticationForm):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control',
             })
+
+class CvForm(forms.Form):
+    class Meta:
+        model = Cv
+        exclude = ('user',)
