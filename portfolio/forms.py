@@ -42,7 +42,19 @@ class UserLoginForm(AuthenticationForm):
                 'class': 'form-control',
             })
 
-class CvForm(forms.Form):
+class CvForm(forms.ModelForm):
+    summary = forms.CharField(
+        max_length=300,
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'class': 'my-input',
+            'maxlength': 300,
+        })
+    )
+
     class Meta:
         model = Cv
         exclude = ('user',)
+        widgets = {
+            'skills': forms.CheckboxSelectMultiple(),
+        }

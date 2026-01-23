@@ -69,3 +69,28 @@ class Cv(models.Model):
 
     def __str__(self):
         return f'CV: {self.user}'
+    
+class CvFile(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='cv_files'
+    )
+    cv = models.ForeignKey(
+        'Cv',
+        on_delete=models.CASCADE,
+        related_name='files'
+    )
+    file = models.FileField(
+        upload_to='cvs/',
+        verbose_name=_('CV file')
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('CV file')
+        verbose_name_plural = _('CV files')
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'CV file for {self.user}'

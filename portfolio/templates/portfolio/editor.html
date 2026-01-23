@@ -22,6 +22,87 @@
                 <p class="centerBlock_editorBlock_logoBlock_textBlock_title">Marchello</p>
             </div>
         </div>
+        <div class="centerBlock_editorBlock_formBlock">
+            <form id="editorForm" class="centerBlock_editorBlock_formBlock_formInputs" action="{% url 'editor' %}" method="post" novalidate>
+                {% csrf_token %}
+
+                {% for field in form %}
+                
+                    {% if field.name == 'skills' %}
+                        <div style="margin-top: 15px; margin-bottom: 15px;">
+                            <label style="color: #FFF; font-family: 'Overpass Mono'; margin-bottom: 5px; display:block;">
+                                {{ field.label }}:
+                            </label>
+
+                            <div class="skills-grid">
+                                {% for checkbox in field %}
+                                    <div class="skill-item">
+                                        {{ checkbox.tag }}
+                                        <label for="{{ checkbox.id_for_label }}" class="skill-btn">
+                                            {{ checkbox.choice_label }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    {% else %}
+                        <p>
+                            {{ field.label_tag }} <br>
+                            {{ field }}
+                        </p>
+                    {% endif %}
+                    
+                {% endfor %}
+            </form>
+        </div>
+        <div class="centerBlock_editorBlock_buttonsBlockCenter">
+            <div class="centerBlock_editorBlock_buttonsBlockCenter_buttonsBlock">
+                <button id="createCvBtn" disabled style="opacity: 0.5; cursor: not-allowed;" class="centerBlock_editorBlock_buttonsBlockCenter_buttonsBlock_buttonCreate" type="button">Create CV</button>
+                <a href="#">
+                    <button class="centerBlock_editorBlock_buttonsBlockCenter_buttonsBlock_buttonHistory" type="button">CV creation history</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="centerBlock_resumeBlock">
+        <div class="centerBlock_resumeBlock_textBlock">
+            <div class="centerBlock_resumeBlock_textBlock_contactBlock">
+                {% if user.is_authenticated %}
+                    <p class="centerBlock_resumeBlock_textBlock_contactBlock_usernameText">{{ user.username }}</p>
+                {% endif %}
+                
+                <p class="centerBlock_resumeBlock_textBlock_contactBlock_workEmail js-preview-email"></p>
+                <p class="centerBlock_resumeBlock_textBlock_contactBlock_phoneNumber js-preview-phone"></p>
+                
+                <p class="centerBlock_resumeBlock_textBlock_contactBlock_GitHubTitle">Github:</p>
+                <a class="centerBlock_resumeBlock_textBlock_contactBlock_GitHubLink js-preview-github" target="_blank"></a>
+            </div>
+            
+            <div class="centerBlock_resumeBlock_textBlock_summaryBlock">
+                <p class="centerBlock_resumeBlock_textBlock_summaryBlock_summaryTitle">Summary:</p>
+                <p class="centerBlock_resumeBlock_textBlock_summaryBlock_summaryText js-preview-summary"></p>
+            </div>
+            
+            <div class="centerBlock_resumeBlock_textBlock_skillsBlock">
+                <p class="centerBlock_resumeBlock_textBlock_skillsBlock_skillsTitle">Technical skills:</p>
+                <div class="centerBlock_resumeBlock_textBlock_skillsBlock_skillsItemsBlock">
+                    <div class="js-preview-skills-container" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="centerBlock_resumeBlock_textBlock_workExperienceBlock">
+                <p class="centerBlock_resumeBlock_textBlock_workExperienceBlock_workExperienceTitle">Work experience:</p>
+                <p class="centerBlock_resumeBlock_textBlock_workExperienceBlock_workExperienceText js-preview-work"></p>
+            </div>
+            
+            <div class="centerBlock_resumeBlock_textBlock_educationBlock">
+                <p class="centerBlock_resumeBlock_textBlock_educationBlock_educationTitle">Education:</p>
+                <p class="centerBlock_resumeBlock_textBlock_educationBlock_educationText js-preview-education"></p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -31,4 +112,8 @@
 </script>
 {% endif %}
 
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'portfolio/js/editor.js' %}"></script>
 {% endblock %}
