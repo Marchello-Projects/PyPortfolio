@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import os
 
 class SkillType(models.TextChoices):
     SQL = 'SQL', _('SQL')
@@ -94,3 +95,7 @@ class CvFile(models.Model):
 
     def __str__(self):
         return f'CV file for {self.user}'
+    
+    @property
+    def filename(self):
+        return os.path.basename(self.file.name)

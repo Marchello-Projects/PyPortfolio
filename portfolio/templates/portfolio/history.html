@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}History{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static '/portfolio/css/history.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<div class="logoBlock">
+    <svg width="60" height="50" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[60px] h-[50px] relative" preserveAspectRatio="none">
+        <path d="M54 20.6401C54 18.5184 52.9886 16.4836 51.1882 14.9833C49.3879 13.483 46.9462 12.6401 44.4 12.6401H15.6C13.0539 12.6401 10.6123 13.483 8.81191 14.9833C7.01158 16.4836 6 18.5184 6 20.6401" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M54 20.6401C39.384 32.6401 20.616 32.6401 6 20.6401" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M53.9998 20.6401L51.5998 36.6401C51.2417 38.8177 49.9661 40.8179 48.0005 42.2835C46.0352 43.7491 43.5085 44.5845 40.8718 44.6401H18.9358C16.2992 44.5845 13.7724 43.7491 11.807 42.2835C9.84159 40.8179 8.56589 38.8177 8.20786 36.6401L5.80786 20.6401" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M20.4233 12.0801C20.4233 9.95834 21.4347 7.9235 23.2351 6.42322C25.0354 4.92292 27.4773 4.08008 30.0234 4.08008C32.5693 4.08008 35.0113 4.92292 36.8116 6.42322C38.6118 7.9235 39.6234 9.95834 39.6234 12.0801" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <div class="logoBlock_textBlock">
+        <p class="logoBlock_textBlock_miniTitle">PyPortfolio by:</p>
+        <p class="logoBlock_textBlock_title">Marchello</p>
+    </div>
+</div>
+<div class="mainBlock">
+    <div class="mainBlock_filesBlock">
+        <div class="mainBlock_filesBlock_titleTextCenterBlock">
+            <p class="mainBlock_filesBlock_titleTextCenterBlock_titleText">CV creation history:</p>
+        </div>
+        
+        {% for file in files %}
+        <div class="mainBlock_filesBlock_fileBlock">
+            <div class="mainBlock_filesBlock_fileBlock_titleTextCenterBlock">
+                <p class="mainBlock_filesBlock_fileBlock_titleTextCenterBlock_titleText">{{ file.filename }}</p>
+            </div>
+            
+            <a href="{% url 'cv_download' file.pk %}">
+                <button class="mainBlock_filesBlock_fileBlock_buttonDownload">Download</button>
+            </a>
+            
+            <form action="{% url 'cv_delete' file.pk %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="mainBlock_filesBlock_fileBlock_buttonDelete">Delete</button>
+            </form>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+<div class="buttonBlock">
+    <a href="{% url 'editor' %}">
+        <button class="buttonBlock_backToEditorButton">Back to editor</button>
+    </a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'portfolio/js/history.js' %}"></script>
+{% endblock %}

@@ -131,5 +131,5 @@ STATICFILES_DIRS = [
     BASE_DIR / "static", 
 ]
 
-MEDIA_URL = '/cvs/'
-MEDIA_ROOT = BASE_DIR / 'cvs'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
