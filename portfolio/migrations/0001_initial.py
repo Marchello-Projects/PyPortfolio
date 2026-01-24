@@ -15,33 +15,85 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Skill',
+            name="Skill",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(choices=[('SQL', 'SQL'), ('PY', 'Python'), ('HTML', 'HTML'), ('CSS', 'CSS'), ('JS', 'JavaScript'), ('CPP', 'C++'), ('PHP', 'PHP'), ('RUST', 'Rust')], max_length=4, unique=True, verbose_name='Skill')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "code",
+                    models.CharField(
+                        choices=[
+                            ("SQL", "SQL"),
+                            ("PY", "Python"),
+                            ("HTML", "HTML"),
+                            ("CSS", "CSS"),
+                            ("JS", "JavaScript"),
+                            ("CPP", "C++"),
+                            ("PHP", "PHP"),
+                            ("RUST", "Rust"),
+                        ],
+                        max_length=4,
+                        unique=True,
+                        verbose_name="Skill",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Skill',
-                'verbose_name_plural': 'Skills',
-                'ordering': ['code'],
+                "verbose_name": "Skill",
+                "verbose_name_plural": "Skills",
+                "ordering": ["code"],
             },
         ),
         migrations.CreateModel(
-            name='Cv',
+            name="Cv",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('work_email', models.EmailField(max_length=100, verbose_name='Work email')),
-                ('phone_number', models.CharField(max_length=50, verbose_name='Phone number')),
-                ('github', models.URLField(blank=True, verbose_name='GitHub profile')),
-                ('summary', models.TextField(verbose_name='Summary')),
-                ('work_experience', models.TextField(verbose_name='Work experience')),
-                ('education', models.TextField(verbose_name='Education')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cvs', to=settings.AUTH_USER_MODEL, verbose_name='User')),
-                ('skills', models.ManyToManyField(related_name='cvs', to='portfolio.skill', verbose_name='Skills')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "work_email",
+                    models.EmailField(max_length=100, verbose_name="Work email"),
+                ),
+                (
+                    "phone_number",
+                    models.CharField(max_length=50, verbose_name="Phone number"),
+                ),
+                ("github", models.URLField(blank=True, verbose_name="GitHub profile")),
+                ("summary", models.TextField(verbose_name="Summary")),
+                ("work_experience", models.TextField(verbose_name="Work experience")),
+                ("education", models.TextField(verbose_name="Education")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="cvs",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="User",
+                    ),
+                ),
+                (
+                    "skills",
+                    models.ManyToManyField(
+                        related_name="cvs", to="portfolio.skill", verbose_name="Skills"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'CV',
-                'verbose_name_plural': 'CVs',
+                "verbose_name": "CV",
+                "verbose_name_plural": "CVs",
             },
         ),
     ]

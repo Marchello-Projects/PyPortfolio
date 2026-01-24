@@ -8,24 +8,46 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('portfolio', '0001_initial'),
+        ("portfolio", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CvFile',
+            name="CvFile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(upload_to='cvs/', verbose_name='CV file')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('cv', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='files', to='portfolio.cv')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='cv_files', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("file", models.FileField(upload_to="cvs/", verbose_name="CV file")),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "cv",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="files",
+                        to="portfolio.cv",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="cv_files",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'CV file',
-                'verbose_name_plural': 'CV files',
-                'ordering': ['-created_at'],
+                "verbose_name": "CV file",
+                "verbose_name_plural": "CV files",
+                "ordering": ["-created_at"],
             },
         ),
     ]
